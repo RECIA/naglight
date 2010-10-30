@@ -10,16 +10,17 @@
 	- @contacts.each do |contact|
 		%tr{:class => cycle('row1', 'row2')}
 			%td.contact_name{:align => "center", :valign => "middle"}
-				= data[:name]
+				= contact[:name]
 			%td.contact_alias{:align => "center", :valign => "middle"}
-				= data[:alias]
+				= contact[:alias]
 			%td.contact_email{:align => "center", :valign => "middle"}
-				= data[:email]
+				= contact[:email]
 			%td.contact_pager{:align => "center", :valign => "middle"}
-				= data[:pager]
+				= contact[:pager]
 			%td.contact_notif_period{:align => "center", :valign => "middle"}
-				= data[:service_notification_period]
+				= contact[:service_notification_period]
 			%td.contact_notif_period_enabled{:align => "center", :valign => "middle"}
-				= data[:service_notification_enabled]
+				= contact[:service_notification_enabled]
+				- # TODO: display nothing ????
 			%td.contact_can_submit_commands{:align => "center", :valign => "middle"}
-				= data[:can_submit_commands]
+				= contact[:can_submit_commands]
