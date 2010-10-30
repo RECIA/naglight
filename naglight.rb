@@ -11,6 +11,17 @@ $mk_livestatus_debug=true
 
 
 get '/' do
+  @title = "Index"
+  haml :index
+end
+
+
+##################################
+##########  API STUFF   ##########
+##################################
+
+get '/api/?' do
+  haml :"api/index"
 end
 
 get '/api/get/contacts' do

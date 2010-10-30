@@ -1,0 +1,60 @@
+body {
+	background-color: #D1D1D1;
+}
+
+div#header {
+	margin-top: 2em;
+/*	height: 4em;*/
+}
+
+div#grid_header {
+	border-bottom: 1px solid #525252;
+}
+
+div#grid_header #logo {
+/*	line-height: 4em;*/
+}
+
+div#grid_header .menu a {
+	font-family: Arial;
+	font-size: 10pt;
+	color: black; /*#525252*/
+	text-decoration: none;
+}
+
+div#content {
+	margin-top: 2em;
+	margin-bottom: 2em;
+	min-height: 20em;
+}
+
+div#grid_content {
+	padding-top: 1em;
+	font-family: Arial;
+	font-size: 12pt;
+}
+
+div#footer {
+	margin-top: 2em;
+	margin-bottom: 2em;
+	height: 3em;
+}
+
+div#grid_footer {
+	line-height: 3em;
+	font-family: Arial;
+        font-size: 11pt;
+        color: #313131;
+	border-top: 1px solid #525252;
+	text-align: center;
+}
+
+.hrrr {
+	color: #1E1E1E;
+        background-color: #1E1E1E; /* for gecko */
+        border-color: #484848;
+}
+
+.no-puce {
+	list-style-type: none;
+}

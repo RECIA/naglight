@@ -1,0 +1,63 @@
+!!! Strict
+%html
+	%head
+		%meta{ :content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+		%link{:rel => "stylesheet", :href => "css/reset.css"}
+		%link{:rel => "stylesheet", :href => "css/text.css"}
+		%link{:rel => "stylesheet", :href => "css/960.css"}
+		%link{:rel => "stylesheet", :href => "css/site.css"}
+		%title
+			= "#{@title} - Naglight"
+	%body
+		#page
+			#header
+				.container_12
+					#grid_header.grid_12
+						#logo.grid_2.alpha
+							%a{:href => "/"} Naglight Logo!
+						
+						.grid_2.menu
+							%ul
+								%li.no-puce Hosts
+								%li All hosts
+								%li Hosts groups
+								%li By groups
+	
+						.grid_2.menu
+							%ul
+								%li.no-puce Services
+								%li All Services
+								%li Services groups
+								%li By groups
+	
+						.grid_2.menu
+							%ul
+								%li.no-puce Problems
+								%li Host Problems
+								%li Service Problems
+								%li Pending services
+								%li Unchecked services
+	
+						.grid_2.menu
+							%ul
+								%li.no-puce Other
+								%li Comments
+								%li Downtimes
+								%li Events foobarbaz
+								%li Logs
+								%li
+									%a{:href => "/contact"} Contacts
+	
+						.clear
+
+			#content
+				.container_12
+					#grid_content.grid_12
+						= yield
+					.clear
+
+			#footer
+				.container_12
+					#grid_footer.grid_12
+						Footer
+					.clear
