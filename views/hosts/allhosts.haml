@@ -8,13 +8,13 @@
 		%th Unkn
 		%th Crit
 		%th Pend
-	%tr
-		- @allhosts.each do |host|
-			%td = human_state(host[:state])[0]
-			%td = host[:name]
+	- @allhosts.each do |host|
+		%tr
+			%td= human_state(host[:state])[0]
+			%td= host[:name]
 			%td
 				%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt]}
-			%td = host[:num_services_ok]
-			%td = host[:num_services_warn]
-			%td = host[:num_services_crit]
-			%td = host[:num_services_pending]
+			%td= host[:num_services_ok]
+			%td= host[:num_services_warn]
+			%td= host[:num_services_crit]
+			%td= host[:num_services_pending]
