@@ -1,7 +1,7 @@
 - @allhosts.each do |host|
 	State:
 	= host[:state]
-	= human_state(host[:state])
+	= human_state(host[:state])[0]
 	%br
 	Host:
 	= host[:name]
