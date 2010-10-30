@@ -19,10 +19,13 @@
 		%th.srvc_pend{:align => "center", :valign => "middle"} Pend
 	- col = 0
 	- @allhosts.each do |host|
+		- host_name = host[:name].downcase.gsub(' ', '')
 		- if col == 0
 			<tr>
-		%td{:class => "host_state_#{human_state(host[:state])[0].downcase}", :align => "center", :valign => "middle"}= human_state(host[:state])[0]
-		%td.host_name{:align => "center", :valign => "middle"}= host[:name]
+		%td{:class => "host_state_#{nagios_short_host_state_names(host[:state]).downcase}", :align => "center", :valign => "middle"}= nagios_short_host_state_names(host[:state])
+		%td.host_name{:align => "center", :valign => "middle"}
+			%span{:id => "show-more-host-#{host_name}"}= host[:name]
+		
 		%td.host_icon{:align => "center", :valign => "middle"}
 			%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
 			
@@ -52,3 +55,24 @@
 		- if col == 2
 			</tr>
 			- col = 0
+
+
+
+- @allhosts.each do |host|
+	%script{:type => "text/javascript"}
+		\//<![CDATA[
+		- host_name = host[:name].downcase.gsub(' ', '')
+		= "$('#show-more-host-#{host_name}').trackStar( { displayID: 'overlay-host-#{host_name}' } ) ;"
+		\//]]>
+
+	%div{:id => "overlay-host-#{host_name}", :class => "hidden-overlay"}
+		Last check:
+		= Time.at(host[:last_check])
+		%br
+		Duration:
+		%br
+		Status Information:
+		= host[:plugin_output]
+		%br
+
+
