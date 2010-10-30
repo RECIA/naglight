@@ -30,7 +30,7 @@
 	- @allhosts.each do |host|
 		- if col == 0
 			<tr>
-		%td{:class => "host_state_#{human_state(host[:state])[0].downcase}"}= human_state(host[:state])[0]
+		%td{:class => "host_state_#{human_state(host[:state])[0].downcase}", :align => "center", :valign => "middle"}= human_state(host[:state])[0]
 		%td.host_name{:align => "center", :valign => "middle"}= host[:name]
 		%td.host_icon{:align => "center", :valign => "middle"}
 			%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
