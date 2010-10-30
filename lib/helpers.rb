@@ -1,21 +1,50 @@
 # Custom helpers
 
-# Return human state from number
-# See (and from) http://nagios.sourceforge.net/docs/3_0/statetypes.html
-def human_state(state)
+def nagios_state_names(state)
   st = case state
-  when 0 then  ["OK"       , "HARD" ]
-  when 1 then  ["CRITICAL" , "SOFT" ]
-  when 2 then  ["WARNING"  , "SOFT" ]
-  when 3 then  ["CRITICAL" , "HARD" ]
-  when 4 then  ["WARNING"  , "HARD" ]
-  when 5 then  ["WARNING"  , "HARD" ]
-  when 6 then  ["OK"       , "HARD" ]
-  when 7 then  ["OK"       , "HARD" ]
-  when 8 then  ["UNKNOWN"  , "SOFT" ]
-  when 9 then  ["OK"       , "SOFT" ]
-  when 10 then ["OK"       , "HARD" ]
+  when 0 then "OK"
+  when 1 then "WARNING"
+  when 2 then "CRITICAL"
+  when 3 then "UNKNOWN"
+  when 4 then "DEPENDENT"
+  end
+  return st
+end
+
+def nagios_short_state_names(state)
+  st = case state
+  when 0 then "OK"
+  when 1 then "WARN"
+  when 2 then "CRIT"
+  when 3 then "UNKN"
+  when 4 then "DEP"
+  end
+  return st
+end
+
+def nagios_short_host_state_names(state)
+  st = case state
+  when 0 then "UP"
+  when 1 then "DOWN"
+  when 2 then "UNREACH"
+  end
+  return st
+end
+
+def cycle(first_value, *values)
+  values.unshift(first_value)
+  return Cycle.new(*values)
+end
+
+class Cycle
+  def initialize(first_value, *values)
+    @values = values.unshift(first_value)
+    @index = 0
   end
   
-  return st
+  def to_s
+    value = @values[@index].to_s
+    @index = (@index + 1) % @values.size
+    return value
+  end
 end
