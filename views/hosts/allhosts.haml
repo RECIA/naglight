@@ -25,11 +25,16 @@
 		%td.host_name{:align => "center", :valign => "middle"}= host[:name]
 		%td.host_icon{:align => "center", :valign => "middle"}
 			%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
-		%td.srvc_ok{:align => "center", :valign => "middle"}=   host[:num_services_ok]
-		%td.srvc_warn{:align => "center", :valign => "middle"}= host[:num_services_warn]
-		%td.srvc_unkn{:align => "center", :valign => "middle"}= host[:num_services_unknown]
-		%td.srvc_crit{:align => "center", :valign => "middle"}= host[:num_services_crit]
-		%td.srvc_pend{:align => "center", :valign => "middle"}= host[:num_services_pending]
+		%td{:align => "center", :valign => "middle", :class => "srvc_ok" if (host[:num_services_ok] > 0)}
+			= host[:num_services_ok]
+		%td{:align => "center", :valign => "middle", :class => "srvc_warn" if (host[:num_services_warn] > 0)}
+			= host[:num_services_warn]
+		%td{:align => "center", :valign => "middle", :class => "srvc_unkn" if (host[:num_services_unknown] > 0)}
+			= host[:num_services_unknown]
+		%td{:align => "center", :valign => "middle", :class => "srvc_crit" if (host[:num_services_crit] > 0)}
+			= host[:num_services_crit]
+		%td{:align => "center", :valign => "middle", :class => "srvc_pend" if (host[:num_services_pending] > 0)}
+			= host[:num_services_pending]
 		- if col == 0
 			%td.nbsp{:align => "center", :valign => "middle"} &nbsp;
 		- col += 1
