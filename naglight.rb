@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'json'
 
+require 'lib/utils'
 require 'lib/ruby-mk-livestatus'
 # You can override some defaults of ruby-mk-livestatus
 # Respect the Array !
