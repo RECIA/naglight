@@ -1,6 +1,7 @@
 - @allhosts.each do |host|
 	State:
 	= host[:state]
+	= human_state(host[:state])
 	%br
 	Host:
 	= host[:name]
@@ -18,3 +19,6 @@
 	%br
 	Pending:
 	= host[:num_services_pending]
+	%br
+	%br
+	%br
