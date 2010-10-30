@@ -17,15 +17,6 @@
 		%th.srvc_unkn{:align => "center", :valign => "middle"} Unkn
 		%th.srvc_crit{:align => "center", :valign => "middle"} Crit
 		%th.srvc_pend{:align => "center", :valign => "middle"} Pend
-		%th.nbsp{:align => "center", :valign => "middle"} &nbsp;
-		%th.host_state{:align => "center", :valign => "middle"} state
-		%th.host_name{:align => "center", :valign => "middle"} Host
-		%th.host_icon{:align => "center", :valign => "middle"} Icon
-		%th.srvc_ok{:align => "center", :valign => "middle"} OK
-		%th.srvc_warn{:align => "center", :valign => "middle"} Warn
-		%th.srvc_unkn{:align => "center", :valign => "middle"} Unkn
-		%th.srvc_crit{:align => "center", :valign => "middle"} Crit
-		%th.srvc_pend{:align => "center", :valign => "middle"} Pend
 	- col = 0
 	- @allhosts.each do |host|
 		- if col == 0
@@ -39,7 +30,7 @@
 		%td.srvc_unkn{:align => "center", :valign => "middle"}= host[:num_services_unknown]
 		%td.srvc_crit{:align => "center", :valign => "middle"}= host[:num_services_crit]
 		%td.srvc_pend{:align => "center", :valign => "middle"}= host[:num_services_pending]
-		- if col < 1
+		- if col == 0
 			%td.nbsp{:align => "center", :valign => "middle"} &nbsp;
 		- col += 1
 		- if col == 2
