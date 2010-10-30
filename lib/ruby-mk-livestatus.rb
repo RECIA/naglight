@@ -34,6 +34,8 @@ def get_socket_path
   $mk_livestatus_socket_paths.each do |sock|
     if File.exist? sock
       found_sock = sock
+      puts "Socket found: #{sock}" if $mk_livestatus_debug
+      # TODO: break if found
     end
   end
   if found_sock == nil
