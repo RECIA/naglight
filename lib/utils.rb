@@ -24,3 +24,25 @@ def mk_array_to_hash(mk_array)
   
   return final
 end
+
+def time_elapsed(first, last)
+  time_now = last
+  time_old = first
+
+  difference = time_now - time_old
+
+  seconds    =  difference % 60
+  difference = (difference - seconds) / 60
+  minutes    =  difference % 60
+  difference = (difference - minutes) / 60
+  hours      =  difference % 24
+  difference = (difference - hours)   / 24
+  days       =  difference % 7
+  weeks      = (difference - days)    /  7
+
+  return {:weeks   => weeks,
+    :days    => days,
+    :hours   => hours,
+    :minutes => minutes,
+    :seconds => seconds }
+end
