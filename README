@@ -1,0 +1,11 @@
+Naglight - Nagios Light Web Interface
+
+Requirements:
+  - SinatraRB (http://www.sinatrarb.com/)
+  - MK Livestatus (http://mathias-kettner.de/checkmk_livestatus.html)
+
+Authors:
+  - Marc Lagrange <rhaamo@gruik.at>
+
+License:
+  - MIT License
