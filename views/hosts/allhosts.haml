@@ -1,46 +1,46 @@
 %table{:border => 0, :class => "table_list_hosts"}
 	%tr
-		%th.host_state state
-		%th.host_name  Host
-		%th.host_icon  Icon
-		%th.srvc_ok    OK
-		%th.srvc_warn  Warn
-		%th.srvc_unkn  Unkn
-		%th.srvc_crit  Crit
-		%th.srvc_pend  Pend
-		%th.nbsp       &nbsp;
-		%th.host_state state
-		%th.host_name  Host
-		%th.host_icon  Icon
-		%th.srvc_ok    OK
-		%th.srvc_warn  Warn
-		%th.srvc_unkn  Unkn
-		%th.srvc_crit  Crit
-		%th.srvc_pend  Pend
-		%th.nbsp       &nbsp;
-		%th.host_state state
-		%th.host_name  Host
-		%th.host_icon  Icon
-		%th.srvc_ok    OK
-		%th.srvc_warn  Warn
-		%th.srvc_unkn  Unkn
-		%th.srvc_crit  Crit
-		%th.srvc_pend  Pend
+		%th.host_state{:align => "center", :valign => "middle"} state
+		%th.host_name{:align => "center", :valign => "middle"} Host
+		%th.host_icon{:align => "center", :valign => "middle"} Icon
+		%th.srvc_ok{:align => "center", :valign => "middle"} OK
+		%th.srvc_warn{:align => "center", :valign => "middle"} Warn
+		%th.srvc_unkn{:align => "center", :valign => "middle"} Unkn
+		%th.srvc_crit{:align => "center", :valign => "middle"} Crit
+		%th.srvc_pend{:align => "center", :valign => "middle"} Pend
+		%th.nbsp{:align => "center", :valign => "middle"} &nbsp;
+		%th.host_state{:align => "center", :valign => "middle"} state
+		%th.host_name{:align => "center", :valign => "middle"} Host
+		%th.host_icon{:align => "center", :valign => "middle"} Icon
+		%th.srvc_ok{:align => "center", :valign => "middle"} OK
+		%th.srvc_warn{:align => "center", :valign => "middle"} Warn
+		%th.srvc_unkn{:align => "center", :valign => "middle"} Unkn
+		%th.srvc_crit{:align => "center", :valign => "middle"} Crit
+		%th.srvc_pend{:align => "center", :valign => "middle"} Pend
+		%th.nbsp{:align => "center", :valign => "middle"} &nbsp;
+		%th.host_state{:align => "center", :valign => "middle"} state
+		%th.host_name{:align => "center", :valign => "middle"} Host
+		%th.host_icon{:align => "center", :valign => "middle"} Icon
+		%th.srvc_ok{:align => "center", :valign => "middle"} OK
+		%th.srvc_warn{:align => "center", :valign => "middle"} Warn
+		%th.srvc_unkn{:align => "center", :valign => "middle"} Unkn
+		%th.srvc_crit{:align => "center", :valign => "middle"} Crit
+		%th.srvc_pend{:align => "center", :valign => "middle"} Pend
 	- col = 0
 	- @allhosts.each do |host|
 		- if col == 0
 			<tr>
 		%td{:class => "host_state_#{human_state(host[:state])[0].downcase}"}= human_state(host[:state])[0]
-		%td.host_name= host[:name]
-		%td.host_icon
+		%td.host_name{:align => "center", :valign => "middle"}= host[:name]
+		%td.host_icon{:align => "center", :valign => "middle"}
 			%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
-		%td.srvc_ok=   host[:num_services_ok]
-		%td.srvc_warn= host[:num_services_warn]
-		%td.srvc_unkn= host[:num_services_unknown]
-		%td.srvc_crit= host[:num_services_crit]
-		%td.srvc_pend= host[:num_services_pending]
+		%td.srvc_ok{:align => "center", :valign => "middle"}=   host[:num_services_ok]
+		%td.srvc_warn{:align => "center", :valign => "middle"}= host[:num_services_warn]
+		%td.srvc_unkn{:align => "center", :valign => "middle"}= host[:num_services_unknown]
+		%td.srvc_crit{:align => "center", :valign => "middle"}= host[:num_services_crit]
+		%td.srvc_pend{:align => "center", :valign => "middle"}= host[:num_services_pending]
 		- if col < 3
-			%td.nbsp &nbsp;
+			%td.nbsp{:align => "center", :valign => "middle"} &nbsp;
 		- col += 1
 		- if col == 3
 			</tr>
