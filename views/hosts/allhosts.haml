@@ -1,24 +1,20 @@
-- @allhosts.each do |host|
-	State:
-	= host[:state]
-	= human_state(host[:state])[0]
-	%br
-	Host:
-	= host[:name]
-	%br
-	%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt]}
-	%br
-	OK:
-	= host[:num_services_ok]
-	%br
-	Warning:
-	= host[:num_services_warn]
-	%br
-	Critical:
-	= host[:num_services_crit]
-	%br
-	Pending:
-	= host[:num_services_pending]
-	%br
-	%br
-	%br
+%table{:border => 0}
+	%tr
+		%th state
+		%th Host
+		%th Icon
+		%th OK
+		%th Warn
+		%th Unkn
+		%th Crit
+		%th Pend
+	%tr
+		- @allhosts.each do |host|
+			%td = human_state(host[:state])[0]
+			%td = host[:name]
+			%td
+				%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt]}
+			%td = host[:num_services_ok]
+			%td = host[:num_services_warn]
+			%td = host[:num_services_crit]
+			%td = host[:num_services_pending]
