@@ -122,10 +122,18 @@ div#grid_footer {
 	border: 1px solid #C0C0C0;
 }
 
-.table_list_hosts .nbsp {
-	border-color: none;
-	border-size: 0px;
+.table_list_hosts th.nbsp {
+	border-top: none;
+	border-bottom: none;
 	width: 2em;
+	background-color: #D1D1D1;
+}
+
+.table_list_hosts td.nbsp {
+	border-top: none;
+	border-bottom: none;
+	width: 2em;
+	background-color: #D1D1D1;
 }
 
 .table_list_hosts tr {
