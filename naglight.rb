@@ -18,7 +18,7 @@ end
 
 get '/contacts' do
   @title = "Contacts"
-  @contacts = mk_array_to_hash(JSON.parse(get_contacts))
+  @contacts = mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "contacts"})))
   haml :"other/contacts"
 end
 
