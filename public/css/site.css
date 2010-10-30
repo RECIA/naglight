@@ -58,3 +58,80 @@ div#grid_footer {
 .no-puce {
 	list-style-type: none;
 }
+
+.table_list_hosts {
+	font-size: 10pt;
+	background-color: #E9E9E9;
+}
+
+.table_list_hosts td {
+	border: 1px solid #ACACAC;
+}
+
+.table_list_hosts td .srvc_ok {
+	background-color: #00AE2A;
+	color: white;
+}
+
+.table_list_hosts td .srvc_warn {
+	background-color: #FFFE00;
+	color: black;
+	font-style: bold;
+}
+
+.table_list_hosts td .srvc_unkn {
+	background-color: #FF7600;
+	color: white;
+}
+
+.table_list_hosts td .srvc_crit {
+	background-color: #AD0203;
+	color: white;
+	font-style: bold;
+}
+
+.table_list_hosts td .srvc_pend {
+	background-color: #757575;
+	color: white;
+}
+
+.table_list_hosts td .host_state_ok {
+	background-color: #00AE2A;
+	color: white;
+}
+
+.table_list_hosts td .host_state_critical {
+	background-color: #AD0203;
+	color: white;
+	font-style: bold;
+}
+
+.table_list_hosts td .host_state_warning {
+	background-color: #FFFE00;
+	color: black;
+	font-style: bold;
+}
+
+.table_list_hosts td .host_state_unknown {
+	background-color: #FF7600;
+	color: white;
+}
+
+.table_list_hosts td .nbsp {
+	border-color: none;
+	border-size: 0px;
+}
+
+.table_list_hosts th {
+	background-color: #96ADAD;
+	border: 1px solid #ACACAC;
+}
+
+.table_list_hosts th .nbsp {
+	border-color: none;
+	border-size: 0px;
+}
+
+.table_list_hosts tr {
+	
+}

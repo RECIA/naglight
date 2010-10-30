@@ -1,20 +1,47 @@
-%table{:border => 0}
+%table{:border => 0, :class => "table_list_hosts"}
 	%tr
-		%th state
-		%th Host
-		%th Icon
-		%th OK
-		%th Warn
-		%th Unkn
-		%th Crit
-		%th Pend
+		%th.host_state state
+		%th.host_name  Host
+		%th.host_icon  Icon
+		%th.srvc_ok    OK
+		%th.srvc_warn  Warn
+		%th.srvc_unkn  Unkn
+		%th.srvc_crit  Crit
+		%th.srvc_pend  Pend
+		%th.nbsp       &nbsp;
+		%th.host_state state
+		%th.host_name  Host
+		%th.host_icon  Icon
+		%th.srvc_ok    OK
+		%th.srvc_warn  Warn
+		%th.srvc_unkn  Unkn
+		%th.srvc_crit  Crit
+		%th.srvc_pend  Pend
+		%th.nbsp       &nbsp;
+		%th.host_state state
+		%th.host_name  Host
+		%th.host_icon  Icon
+		%th.srvc_ok    OK
+		%th.srvc_warn  Warn
+		%th.srvc_unkn  Unkn
+		%th.srvc_crit  Crit
+		%th.srvc_pend  Pend
+	- col = 0
 	- @allhosts.each do |host|
-		%tr
-			%td= human_state(host[:state])[0]
-			%td= host[:name]
-			%td
-				%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt]}
-			%td= host[:num_services_ok]
-			%td= host[:num_services_warn]
-			%td= host[:num_services_crit]
-			%td= host[:num_services_pending]
+		- if col == 0
+			<tr>
+		%td{:class => "host_state_#{human_state(host[:state])[0].downcase}"}= human_state(host[:state])[0]
+		%td.host_name= host[:name]
+		%td.host_icon
+			%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
+		%td.srvc_ok=   host[:num_services_ok]
+		%td.srvc_warn= host[:num_services_warn]
+		%td.srvc_unkn= host[:num_services_unknown]
+		%td.srvc_crit= host[:num_services_crit]
+		%td.srvc_pend= host[:num_services_pending]
+		- if col < 3
+			%td.nbsp &nbsp;
+		- col += 1
+		- if col == 3
+			</tr>
+			- col = 0
