@@ -1,7 +1,7 @@
 # Various utils
 def mk_array_to_hash(mk_array)
   header = mk_array[0]
-  parsed.shift
+  mk_array.shift
   datas  = mk_array
 
   final = []
@@ -14,9 +14,6 @@ def mk_array_to_hash(mk_array)
 
     data.each do |indata|
       # each columns
-      puts "Header: #{header[size_cur]}"
-      puts "  Data: #{indata}"
-      puts ""
       hashline[header[size_cur].to_sym] = indata
       size_cur+=1
     end
