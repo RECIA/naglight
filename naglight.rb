@@ -16,7 +16,7 @@ get '/' do
   haml :index
 end
 
-get '/contact' do
+get '/contacts' do
   @title = "Contacts"
   @contacts = mk_array_to_hash(JSON.parse(get_contacts))
   haml :"other/contacts"
