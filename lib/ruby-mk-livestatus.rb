@@ -84,13 +84,12 @@ end
 # And PLEASE PLEASE PLEASE dont override ColumnHeaders if you want json or ...
 def get_mk_livestatus(opts)
   # Checks
-  puts opts.class
   if !opts.include? :table
     raise ArgumentError, "A table name is required!"
   end
   opts[:format] = :json if !opts.include? :format
 
-  query = "GET #{opts[:format]}\n"
+  query = "GET #{opts[:table]}\n"
   
   if opts.include? :columns
     if (opts[:columns].size > 0) and (opts[:columns].is_a? Array)
