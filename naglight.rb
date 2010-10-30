@@ -32,5 +32,5 @@ end
 
 get '/api/get/contacts' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return get_contacts
+  return get_mk_livestatus({:table => "contacts"})
 end

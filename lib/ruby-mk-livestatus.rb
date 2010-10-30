@@ -71,16 +71,38 @@ def make_query(query)
   return datas
 end
 
-def get_contacts(only_columns=[], extras_headers=nil, format=:json)
-  query = "GET contacts\n"
-  if (only_columns.size > 0) and (only_columns.is_a? Array)
-    query << "Columns: #{only_columns.join(' ')}\n"
+# Eat a Hash:
+# => :table               String, Required
+# => :columns             Array,  Optional
+# => :extras_headers      String, Optional
+# => :format              Symbol, Optional, Default to :json, Available: :json :csv
+# See http://mathias-kettner.de/checkmk_livestatus.html for "extras headers" or only columns
+# or format
+# By default "ResponseHeader: fixed16\n" is added to do a Return Code check
+# PLEASE PLEASE PLEASE don't override this or it will totally break the parsing stuff...
+# Also by default, ColumnHeaders: on is added if :format => :json is choosed
+# And PLEASE PLEASE PLEASE dont override ColumnHeaders if you want json or ...
+def get_mk_livestatus(opts)
+  # Checks
+  puts opts.class
+  if !opts.include? :table
+    raise ArgumentError, "A table name is required!"
   end
-  if format == :json
+  opts[:format] = :json if !opts.include? :format
+
+  query = "GET #{opts[:format]}\n"
+  
+  if opts.include? :columns
+    if (opts[:columns].size > 0) and (opts[:columns].is_a? Array)
+      query << "Columns: #{opts[:columns].join(' ')}\n"
+    end
+  end
+  
+  if opts[:format] == :json
     query << "OutputFormat: json\n"
     query << "ColumnHeaders: on\n"
   end
-  query << extras_headers if extras_headers
+  query << opts[:extras_headers] if opts.include? :extras_headers
 
   return make_query(query)
 end
