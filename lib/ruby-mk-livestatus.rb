@@ -50,7 +50,7 @@ def make_query(query)
   query << "ResponseHeader: fixed16\n"
   socket = get_socket_path
 
-  if @mk_livestatus_debug
+  if $mk_livestatus_debug
     puts "Preparing to send packet:"
     puts query
     puts "---"
