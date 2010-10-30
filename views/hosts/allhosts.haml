@@ -39,7 +39,7 @@
 		%td.srvc_unkn{:align => "center", :valign => "middle"}= host[:num_services_unknown]
 		%td.srvc_crit{:align => "center", :valign => "middle"}= host[:num_services_crit]
 		%td.srvc_pend{:align => "center", :valign => "middle"}= host[:num_services_pending]
-		- if col < 3
+		- if col < 2
 			%td.nbsp{:align => "center", :valign => "middle"} &nbsp;
 		- col += 1
 		- if col == 3
