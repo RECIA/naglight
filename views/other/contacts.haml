@@ -1,11 +1,25 @@
-- @contacts.each do |data|
-	Name:
-	= data[:name]
-	%br
-	Alias:
-	= data[:alias]
-	%br
-	Email:
-	= data[:email]
-	%br
-	%br
+%table{:border => 0, :class => "table_list_hosts", :width => "100%"}
+	%tr
+		%th.contact_name{:align => "center", :valign => "middle"} Name
+		%th.contact_alias{:align => "center", :valign => "middle"} Alias
+		%th.contact_email{:align => "center", :valign => "middle"} Email
+		%th.contact_pager{:align => "center", :valign => "middle"} Pager
+		%th.contact_notif_period{:align => "center", :valign => "middle"} Notification period
+		%th.contact_notif_period_enabled{:align => "center", :valign => "middle"} Notification period enabled
+		%th.contact_can_submit_commands{:align => "center", :valign => "middle"} Can submit commands
+	- @contacts.each do |contact|
+		%tr{:class => cycle('row1', 'row2')}
+			%td.contact_name{:align => "center", :valign => "middle"}
+				= data[:name]
+			%td.contact_alias{:align => "center", :valign => "middle"}
+				= data[:alias]
+			%td.contact_email{:align => "center", :valign => "middle"}
+				= data[:email]
+			%td.contact_pager{:align => "center", :valign => "middle"}
+				= data[:pager]
+			%td.contact_notif_period{:align => "center", :valign => "middle"}
+				= data[:service_notification_period]
+			%td.contact_notif_period_enabled{:align => "center", :valign => "middle"}
+				= data[:service_notification_enabled]
+			%td.contact_can_submit_commands{:align => "center", :valign => "middle"}
+				= data[:can_submit_commands]
