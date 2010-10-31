@@ -31,6 +31,17 @@ def nagios_short_host_state_names(state)
   return st
 end
 
+def number_to_human(num)
+  if num == 1
+    return "yes"
+  end
+  return "unknown"
+end
+
+
+
+
+
 def cycle(first_value, *values)
   values.unshift(first_value)
   return Cycle.new(*values)
