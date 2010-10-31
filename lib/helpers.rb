@@ -38,6 +38,12 @@ def number_to_human(num)
   return "unknown"
 end
 
+# Just proxying get_services for views
+def host_get_services(query)
+  return get_services(query)
+end
+
+
 
 
 def cycle(first_value, *values)

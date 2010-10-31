@@ -10,8 +10,17 @@ require 'lib/ruby-mk-livestatus'
 $mk_livestatus_socket_paths += ["/home/nagios/live"]
 # true / false
 $mk_livestatus_debug=true
-
 require 'lib/mk-calls'  # put some MK Livestatus calls in external file
+
+# Need to improve this...
+before do
+  # number  /  short  /  end of "num_services_foo" key
+  @simple_states_list = [ [0, "OK", "OK"],
+                          [1, "WARN", "WARN"],
+                          [2, "CRIT", "CRIT"],
+                          [3, "UNKN", "UNKNOWN"],
+                          [4, "DEP", "PENDING"] ]
+end
 
 get '/' do
   @title = "Index"
@@ -40,7 +49,12 @@ end
 
 get '/api/get/allhosts' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "services"}))).to_json
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "hosts"}))).to_json
+end
+
+get '/api/get/allhosts/raw' do
+  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
+  return get_mk_livestatus({:table => "hosts"})
 end
 
 get '/api/get/contacts' do
@@ -48,12 +62,10 @@ get '/api/get/contacts' do
   return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "contacts"}))).to_json
 end
 
-get '/api/get/allhosts/raw' do
-  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return get_mk_livestatus({:table => "services"})
-end
-
 get '/api/get/contacts/raw' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
   return get_mk_livestatus({:table => "contacts"})
 end
+
+
+

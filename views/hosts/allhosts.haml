@@ -34,19 +34,23 @@
 			= host[:num_services_ok]
 		
 		- (host[:num_services_warn] > 0) ? c_warn = "srvc_warn" : c_warn = ""
-		%td{:align => "center", :valign => "middle", :class => c_warn}
+		- (host[:num_services_warn] > 0) ? id_warn = "show-more-host-#{host_name}-services-warn" : id_warn = ""
+		%td{:align => "center", :valign => "middle", :class => c_warn, :id => id_warn}
 			= host[:num_services_warn]
 		
 		- (host[:num_services_unknown] > 0) ? c_unk = "srvc_unkn" : c_unk = ""
-		%td{:align => "center", :valign => "middle", :class => c_unk}
+		- (host[:num_services_unknown] > 0) ? id_unkn = "show-more-host-#{host_name}-services-unkn" : id_unkn = ""
+		%td{:align => "center", :valign => "middle", :class => c_unk, :id => id_unkn}
 			= host[:num_services_unknown]
 		
 		- (host[:num_services_crit] > 0) ? c_crit = "srvc_crit" : c_crit = ""
-		%td{:align => "center", :valign => "middle", :class => c_crit}
+		- (host[:num_services_crit] > 0) ? id_crit = "show-more-host-#{host_name}-services-crit" : id_crit = ""
+		%td{:align => "center", :valign => "middle", :class => c_crit, :id => id_crit}
 			= host[:num_services_crit]
 		
 		- (host[:num_services_pending] > 0) ? c_pend = "srvc_pend" : c_pend = ""
-		%td{:align => "center", :valign => "middle", :class => c_pend}
+		- (host[:num_services_pending] > 0) ? id_pend = "show-more-host-#{host_name}-services-dep" : id_pend = ""
+		%td{:align => "center", :valign => "middle", :class => c_pend, :id => id_pend}
 			= host[:num_services_pending]
 		
 		- if col == 0
@@ -59,9 +63,9 @@
 
 
 - @allhosts.each do |host|
+	- host_name = host[:name].downcase.gsub(' ', '')
 	%script{:type => "text/javascript"}
 		\//<![CDATA[
-		- host_name = host[:name].downcase.gsub(' ', '')
 		= "$('#show-more-host-#{host_name}').trackStar( { displayID: 'overlay-host-#{host_name}' } ) ;"
 		\//]]>
 
@@ -90,5 +94,20 @@
 		Status Information:
 		= host[:plugin_output]
 		%br
-
-
+	
+	-
+	- @simple_states_list[1..-1].each do |state| # exclude OK, not usefull
+		- s_state = state[1].downcase
+		- ss_state = state[2].downcase
+		- if (host["num_services_#{ss_state}".to_sym] > 0)
+			%script{:type => "text/javascript"}
+				\//<![CDATA[
+				= "$('#show-more-host-#{host_name}-services-#{s_state}').trackStar( { displayID: 'overlay-host-#{host_name}-services-#{s_state}' } ) ;"
+				\//]]>
+			
+			%div{:id => "overlay-host-#{host_name}-services-#{s_state}", :class => "hidden-overlay"}
+				- services = host_get_services({:state => state[0], :host_name => host_name, :columns => ["description"]})
+				- services.each do |service|
+					= service[:description]
+					- if services.size > 0
+						%br

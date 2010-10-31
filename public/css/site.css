@@ -137,3 +137,8 @@ div#grid_footer {
 .hidden-overlay {
 	display: none;
 }
+
+#tooltip-preview {
+	border: 1px solid grey;
+	padding: 5px;
+}
