@@ -40,8 +40,6 @@ end
 
 
 
-
-
 def cycle(first_value, *values)
   values.unshift(first_value)
   return Cycle.new(*values)

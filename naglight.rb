@@ -3,7 +3,6 @@ require 'sinatra'
 require 'json'
 
 require 'lib/helpers' # load our view helpers
-
 require 'lib/utils'
 require 'lib/ruby-mk-livestatus'
 # You can override some defaults of ruby-mk-livestatus
@@ -12,9 +11,7 @@ $mk_livestatus_socket_paths += ["/home/nagios/live"]
 # true / false
 $mk_livestatus_debug=true
 
-def get_mk(query)
-  mk_array_to_hash(JSON.parse(get_mk_livestatus(query)))
-end
+require 'lib/mk-calls'  # put some MK Livestatus calls in external file
 
 get '/' do
   @title = "Index"
@@ -43,7 +40,7 @@ end
 
 get '/api/get/allhosts' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "hosts"}))).to_json
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "services"}))).to_json
 end
 
 get '/api/get/contacts' do
@@ -53,7 +50,7 @@ end
 
 get '/api/get/allhosts/raw' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return get_mk_livestatus({:table => "hosts"})
+  return get_mk_livestatus({:table => "services"})
 end
 
 get '/api/get/contacts/raw' do
