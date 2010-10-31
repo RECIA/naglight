@@ -11,17 +11,17 @@
             $this = $(this);
             var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
             $this.hover(function(event) {
-                $('body').append('<div id="preview" style="position: absolute; background: #fff"></div>');
-            $('#' + opts.displayID).clone().css('id', '').appendTo($('#preview')).show();
-            $('#preview')
+                $('body').append('<div id="tooltip-preview" style="position: absolute; background: #fff"></div>');
+            $('#' + opts.displayID).clone().css('id', '').appendTo($('#tooltip-preview')).show();
+            $('#tooltip-preview')
                     .css('top', (event.pageY - opts.xOffset) + 'px')
                     .css('left', (event.pageX + opts.yOffset) + 'px')
                     .fadeIn('fast');
         }, function(event) {
-            $('#preview').remove();
+            $('#tooltip-preview').remove();
         });
         $this.mousemove(function(event) {
-            $('#preview')
+            $('#tooltip-preview')
                     .css('top', (event.pageY - opts.xOffset) + 'px')
                     .css('left', (event.pageX + opts.yOffset) + 'px');
         });
