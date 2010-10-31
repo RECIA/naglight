@@ -51,6 +51,7 @@ end
 ##################################
 
 get '/api/?' do
+  @title = "API Index"
   haml :"api/index"
 end
 
