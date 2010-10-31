@@ -24,7 +24,7 @@
 			<tr>
 		%td{:class => "host_state_#{nagios_short_host_state_names(host[:state]).downcase}", :align => "center", :valign => "middle"}= nagios_short_host_state_names(host[:state])
 		%td.host_name{:align => "center", :valign => "middle", :id => "show-more-host-#{host_name}"}
-			= host[:name]
+			%a{:href => "/host/#{host_name}"}= host[:name]
 		
 		%td.host_icon{:align => "center", :valign => "middle"}
 			%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
@@ -81,6 +81,9 @@
 		%br
 		Status Information:
 		= host[:plugin_output]
+		%br
+		Performance Data:
+		= host[:perf_data]
 		%br
 	
 	-

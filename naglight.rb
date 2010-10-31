@@ -33,6 +33,13 @@ get '/allhosts' do
   haml :"hosts/allhosts"
 end
 
+get '/host/:host_name' do
+  @title = "Host #{params[:host_name]}"
+  extras_headers = "Filter: host_name = #{params[:host_name]}\n"
+  @host = get_mk({:table => "hosts", :extras_headers => extras_headers}).first
+  haml :"hosts/extended_infos"
+end
+
 get '/allservices' do
   @title = "All Services"
   group = "StatsGroupBy: host_name\n" # TODO: get it from params[:group_by]
@@ -60,9 +67,10 @@ get '/api/get/allhosts' do
   return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "hosts"}))).to_json
 end
 
-get '/api/get/allhosts/raw' do
+get '/api/get/host/:host_name' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return get_mk_livestatus({:table => "hosts"})
+  extras_headers = "Filter: host_name = #{params[:host_name]}\n"
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "hosts", :extras_headers => extras_headers}))).first.to_json
 end
 
 get '/api/get/contacts' do
@@ -70,17 +78,7 @@ get '/api/get/contacts' do
   return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "contacts"}))).to_json
 end
 
-get '/api/get/contacts/raw' do
-  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return get_mk_livestatus({:table => "contacts"})
-end
-
 get '/api/get/services' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
   return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "services"}))).to_json
-end
-
-get '/api/get/services/raw' do
-  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return get_mk_livestatus({:table => "services"})
 end

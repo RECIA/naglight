@@ -2,13 +2,13 @@
 %html
 	%head
 		%meta{ :content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
-		%link{:rel => "stylesheet", :href => "css/reset.css"}
-		%link{:rel => "stylesheet", :href => "css/text.css"}
-		%link{:rel => "stylesheet", :href => "css/960.css"}
-		%link{:rel => "stylesheet", :href => "css/site.css"}
+		%link{:rel => "stylesheet", :href => "/css/reset.css"}
+		%link{:rel => "stylesheet", :href => "/css/text.css"}
+		%link{:rel => "stylesheet", :href => "/css/960.css"}
+		%link{:rel => "stylesheet", :href => "/css/site.css"}
 		
-		%script{:type => "text/javascript", :src => "js/jquery-1.4.3.min.js"}
-		%script{:type => "text/javascript", :src => "js/jquery.trackstar.js"}
+		%script{:type => "text/javascript", :src => "/js/jquery-1.4.3.min.js"}
+		%script{:type => "text/javascript", :src => "/js/jquery.trackstar.js"}
 		%title
 			= "#{@title} - Naglight"
 	%body
@@ -23,8 +23,8 @@
 							%ul
 								%li
 									%a{:href => "/allhosts"} All hosts
-								%li Hosts groups
-								%li By groups
+								%li By groups (Grid)
+								%li By groups (Sum)
 	
 						.grid_2.menu
 							%ul
