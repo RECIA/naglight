@@ -64,6 +64,10 @@ div#grid_footer {
 	background-color: #E9E9E9;
 }
 
+.table_list_services {
+	font-size: 9pt;
+}
+
 .table_list_hosts td {
 	border: 1px solid #ACACAC;
 }
@@ -132,6 +136,30 @@ div#grid_footer {
 
 .table_list_hosts tr {
 	
+}
+
+.table_list_services td.service_host {
+	padding-right: 5px;
+}
+
+.table_list_services td.service_name {
+	width: 11em;
+}
+
+.table_list_services td.service_state {
+	width: 6em;
+}
+
+.table_list_services td.service_last_check {
+	width: 16em;
+}
+
+.table_list_services td.service_duration {
+	width: 11em;
+}
+
+.table_list_services td.service_attempt {
+	width: 5em;
 }
 
 .hidden-overlay {

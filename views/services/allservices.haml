@@ -1,0 +1,33 @@
+%table{:border => 0, :class => "table_list_services", :width => "100%"}
+	%tr
+		%th.service_host{:align => "left", :valign => "middle"} Host
+		%th.service_name{:align => "left", :valign => "middle"} Service
+		%th.service_state{:align => "left", :valign => "middle"} Status
+		%th.service_last_check{:align => "left", :valign => "middle"} Last Check
+		%th.service_duration{:align => "left", :valign => "middle"} Duration
+		%th.service_attempt{:align => "left", :valign => "middle"} Attempt
+		%th.service_status_info{:align => "left", :valign => "middle"} Status Information
+	- @curhost = nil
+	- @allservices.each do |service|
+		- if (service[:host_name] != @curhost) and (!@curhost.nil?)
+			%tr
+				%td
+					&nbsp;
+		%tr
+			- if service[:host_name] == @curhost
+				%td.nbsp{:align => "left", :valign => "middle"} &nbsp;
+			- else
+				%td.service_host{:align => "left", :valign => "middle"}= service[:host_name]
+			- @curhost = service[:host_name]
+			%td.service_name{:align => "left", :valign => "middle"}= service[:display_name]
+			%td.service_state{:align => "left", :valign => "middle"}= nagios_state_names(service[:state])
+			%td.service_last_check{:align => "left", :valign => "middle"}= Time.at(service[:last_check])
+			%td.service_duration{:align => "left", :valign => "middle"}
+				- last_state_change = service[:last_state_change]  # timestamp
+				- last_check        = service[:last_check] # timestamp
+				= time_elapsed_human(last_state_change, last_check)
+			%td.service_attempt{:align => "left", :valign => "middle"}
+				= service[:current_attempt]
+				\/
+				= service[:max_check_attempts]
+			%td.service_status_info{:align => "left", :valign => "middle"}= service[:plugin_output]

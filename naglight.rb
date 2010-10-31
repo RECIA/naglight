@@ -33,6 +33,13 @@ get '/allhosts' do
   haml :"hosts/allhosts"
 end
 
+get '/allservices' do
+  @title = "All Services"
+  group = "StatsGroupBy: host_name\n" # TODO: get it from params[:group_by]
+  @allservices = get_mk({:table => "services", :extras_headers => group})
+  haml :"services/allservices"
+end
+
 get '/contacts' do
   @title = "Contacts"
   @contacts = get_mk({:table => "contacts"})
@@ -67,5 +74,12 @@ get '/api/get/contacts/raw' do
   return get_mk_livestatus({:table => "contacts"})
 end
 
+get '/api/get/services' do
+  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "services"}))).to_json
+end
 
-
+get '/api/get/services/raw' do
+  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
+  return get_mk_livestatus({:table => "services"})
+end
