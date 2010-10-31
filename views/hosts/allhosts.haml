@@ -76,19 +76,7 @@
 		Duration:
 		- last_state_change = host[:last_state_change]  # timestamp
 		- last_check        = host[:last_check] # timestamp
-		- time_elap = time_elapsed(last_state_change, last_check)
-		- t_e = ""
-		- if time_elap[:weeks] > 0
-			- t_e = "#{time_elap[:weeks]}w "
-		- if time_elap[:days] > 0
-			- t_e << "#{time_elap[:days]}d "
-		- if time_elap[:hours] > 0
-			- t_e << "#{time_elap[:hours]}h "
-		- if time_elap[:minutes] > 0
-			- t_e << "#{time_elap[:minutes]}m "
-		- if time_elap[:seconds] > 0
-			- t_e << "#{time_elap[:seconds]}s"
-		= t_e
+		= time_elapsed_human(last_state_change, last_check)
 		
 		%br
 		Status Information:

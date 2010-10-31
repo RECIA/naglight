@@ -46,3 +46,24 @@ def time_elapsed(first, last)
     :minutes => minutes,
     :seconds => seconds }
 end
+
+def time_elapsed_human(first, last)
+  time_elap = time_elapsed(first, last)
+  t_e = ""
+  if time_elap[:weeks] > 0
+    t_e = "#{time_elap[:weeks]}w "
+  end
+  if time_elap[:days] > 0
+    t_e << "#{time_elap[:days]}d "
+  end
+  if time_elap[:hours] > 0
+    t_e << "#{time_elap[:hours]}h "
+  end
+  if time_elap[:minutes] > 0
+    t_e << "#{time_elap[:minutes]}m "
+  end
+  if time_elap[:seconds] > 0
+    t_e << "#{time_elap[:seconds]}s"
+  end
+  return t_e
+end
