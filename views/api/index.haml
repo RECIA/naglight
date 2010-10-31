@@ -1,7 +1,20 @@
 API Index
+%br
+%br
+%p
+	Normal is an Array Of Hashes for each object.
+	%br
+	RAW is the pure MK Livestatus JSON stream, a list of list with the first element
+	as headers.
+	%br
+	%br
 
 %ul
 	%li
-		%a{:href => "/api/get/allhosts"} /api/get/allhosts
+		%a{:href => "/api/get/allhosts"} Normal: /api/get/allhosts
 	%li
-		%a{:href => "/api/get/contacts"} /api/get/contacts
+		%a{:href => "/api/get/allhosts"} RAW: /api/get/allhosts/raw
+	%li
+		%a{:href => "/api/get/contacts"} Normal: /api/get/contacts
+	%li
+		%a{:href => "/api/get/contacts"} RAW: /api/get/contacts/raw

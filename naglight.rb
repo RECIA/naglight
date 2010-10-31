@@ -43,10 +43,20 @@ end
 
 get '/api/get/allhosts' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
-  return get_mk_livestatus({:table => "hosts"})
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "hosts"}))).to_json
 end
 
 get '/api/get/contacts' do
+  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "contacts"}))).to_json
+end
+
+get '/api/get/allhosts/raw' do
+  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
+  return get_mk_livestatus({:table => "hosts"})
+end
+
+get '/api/get/contacts/raw' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
   return get_mk_livestatus({:table => "contacts"})
 end
