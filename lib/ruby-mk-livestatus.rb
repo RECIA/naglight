@@ -65,10 +65,26 @@ def make_query(query)
   # We use the ResponseHeader: fixed16 so the first thing is the status code
   # and the second the datas queryied, no need to check if == 200 because
   # check_answer_error will raise an Exception if > 200
-  answer = s.recv(100000000)
+  answer = s.recv(16)
+  puts "####"
+  puts answer
+  puts "####"
   check_answer_error answer
-  datas = s.recv(100000000)
-  return datas
+  # while(we are receving fucking datas)
+  #   bla << add the fucking data
+  # end
+  # return fucking datas
+  bla = ""
+  #datas = s.recv(100000000)
+  while(line = s.gets) do
+    bla << line
+  end
+  
+  if $mk_livestatus_debug
+    puts bla
+  end
+  
+  return bla
 end
 
 # Eat a Hash:
