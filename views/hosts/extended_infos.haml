@@ -1,7 +1,6 @@
 %center
 	%span#hostinfo_name
 		= @host[:alias]
-	%br
 	%span#hostinfo_address
 		(
 		= @host[:address]
@@ -9,7 +8,8 @@
 %br
 %center
 	%span#hostinfo_members_groups
-		Member of
+		Member of:
+		%br
 		= @host[:groups].reverse.join(", ")
 	%br
 	%br

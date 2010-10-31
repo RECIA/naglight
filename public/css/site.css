@@ -170,3 +170,20 @@ div#grid_footer {
 	border: 1px solid grey;
 	padding: 5px;
 }
+
+#hostinfo_name {
+	font-size: 15pt;
+	font-style: bold;
+}
+
+#hostinfo_address {
+	font-size: 10pt;
+}
+
+#hostinfo_members_groups {
+	
+}
+
+#hostinfo_notes {
+	font-size: 10pt;
+}
