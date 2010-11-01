@@ -1,19 +1,66 @@
-%center
-	%span#hostinfo_name
-		= @host[:alias]
-	%span#hostinfo_address
-		(
-		= @host[:address]
-		)
-%br
-%center
-	%span#hostinfo_members_groups
-		Member of:
+.grid_4.alpha
+	%center
+		%span#hostinfo_name
+			= @host[:alias]
+		%span#hostinfo_address
+			(
+			= @host[:address]
+			)
 		%br
-		= @host[:groups].reverse.join(", ")
-	%br
-	%br
-	%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{@host[:icon_image]}", :alt => @host[:icon_image_alt], :border => "0"}
-	%br
-	%span#hostinfo_notes
-		= @host[:notes]
+		%span#hostinfo_members_groups
+			Member of:
+			%br
+			= @host[:groups].reverse.join(", ")
+		%br
+		%br
+		%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{@host[:icon_image]}", :alt => @host[:icon_image_alt], :border => "0"}
+		%br
+		%span#hostinfo_notes
+			= @host[:notes]
+
+.grid_8.omega.extinfos_right
+	%table{:border => 0, :class => "table_host_extinfos", :width => "100%"}
+		%tr
+			%td Host Status:
+			%td= nagios_short_host_state_names(@host[:state])
+			- # Use last_time_down or last_time_unreachable for (for 0d 3mins)... ?
+		%tr
+			%td Status Information:
+			%td= @host[:plugin_output]
+		%tr
+			%td Performance Data:
+			%td= @host[:perf_data]
+		%tr
+			%td Current Attempt:
+			%td
+				= @host[:current_attempt]
+				\/
+				= @host[:max_check_attempts]
+		%tr
+			%td Last Check Time:
+			%td= Time.at(@host[:last_check])
+		%tr
+			%td Check Type:
+			%td= nagios_check_type(@host[:check_type])
+		%tr
+			%td Check Latency / Duration:
+			%td
+				= @host[:latency]
+				\/
+				= (@host[:execution_time] * 1000).round.to_f / 1000
+		%tr
+			%td Next Scheduled Active Check:
+			%td= Time.at(@host[:next_check])
+		%tr
+			%td Last State Change:
+			%td= Time.at(@host[:last_state_change])
+		- # Add Last Notification ?
+		%tr
+			%td Is This Host Flapping?
+			%td
+				= number_to_human(@host[:is_flapping])
+		- # Add Is in scheduled downtime ?
+		%tr
+			%td Last Update:
+			%td= Time.at(@host[:last_time_up])
+.clear
