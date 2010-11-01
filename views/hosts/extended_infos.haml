@@ -17,6 +17,12 @@
 		%br
 		%span#hostinfo_notes
 			= @host[:notes]
+		%br
+		%br
+		%br
+		%a.extinfos_link_view_details{:href => "/services/hosts/#{@host[:name]}"}
+			%img.icon_link_view_details{:src => "/img/detail.png"}
+				&nbsp;View Status Detail for this Host
 
 .grid_8.omega.extinfos_right
 	%table{:border => 0, :class => "table_host_extinfos", :width => "100%"}

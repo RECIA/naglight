@@ -275,3 +275,11 @@ span.host_name_left {
 span.host_name_right {
 	float: right;
 }
+
+.extinfos_link_view_details {
+	text-decoration: none;
+}
+
+.icon_link_view_details {
+	margin-bottom: -2px;
+}
