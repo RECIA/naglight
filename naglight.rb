@@ -35,7 +35,7 @@ get '/hosts' do
   haml :"hosts/index"
 end
 
-get '/hosts/:host_name' do
+get '/hosts/more/:host_name' do
   @title = "Host #{params[:host_name]}"
   extras_headers = "Filter: host_name = #{params[:host_name]}\n"
   @host = get_mk({:table => "hosts", :extras_headers => extras_headers}).first
