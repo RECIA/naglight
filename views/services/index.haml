@@ -19,23 +19,33 @@
 			- _foo = cycle("services_row0", "services_row1")
 		- else
 			- tr_class = cycle("services_row0", "services_row1")
+			
 		%tr{:class => tr_class}
 			- if service[:host_name] == @curhost
 				%td.nbsp{:align => "left", :valign => "middle"} &nbsp;
 			- else
-				%td.service_host{:align => "left", :valign => "middle"}= service[:host_name]
+				%td.service_host{:align => "left", :valign => "middle"}
+					%a{:href => "/hosts/more/#{service[:host_name]}"}= service[:host_name]
 			- @curhost = service[:host_name]
-			%td.service_name{:align => "left", :valign => "middle"}= service[:display_name]
+			
+			%td.service_name{:align => "left", :valign => "middle"}
+				- service_name = service[:display_name].gsub(" ", "+")
+				%a{:href => "/services/more/#{service[:host_name]}/#{service_name}"}= service[:display_name]
 			- service_state = "service_#{nagios_short_state_names(service[:state]).downcase}"
+			
 			%td{:align => "left", :valign => "middle", :class => "service_state #{service_state}"}
 				= nagios_state_names(service[:state])
+				
 			%td.service_last_check{:align => "left", :valign => "middle"}= Time.at(service[:last_check])
+			
 			%td.service_duration{:align => "left", :valign => "middle"}
 				- last_state_change = service[:last_state_change]  # timestamp
 				- last_check        = service[:last_check] # timestamp
 				= time_elapsed_human(last_state_change, last_check)
+				
 			%td.service_attempt{:align => "left", :valign => "middle"}
 				= service[:current_attempt]
 				\/
 				= service[:max_check_attempts]
+				
 			%td.service_status_info{:align => "left", :valign => "middle"}= service[:plugin_output]
