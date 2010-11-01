@@ -31,11 +31,16 @@ def nagios_short_host_state_names(state)
   return st
 end
 
+def nagios_check_type(type)
+  type == 0 ? "ACTIVE" : "PASSIVE"
+end
+
 def number_to_human(num)
-  if num == 1
-    return "yes"
+  n = case num
+  when 0 then "NO"
+  when 1 then "YES"
   end
-  return "unknown"
+  return n
 end
 
 # Just proxying get_services for views
