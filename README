@@ -13,3 +13,4 @@ License:
 TODO:
   - Handle raises of ruby-mk-livestatus to display error page
   - Verification of :host_name (alphanum+_- only)
+  - host_name and service_name (display_name used here) verification IF it can contains anything other than alphanumeric, underscores and spaces
