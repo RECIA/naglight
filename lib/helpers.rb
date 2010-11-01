@@ -43,6 +43,14 @@ def number_to_human(num)
   return n
 end
 
+def number_to_enabledisable(num)
+  n = case num
+  when 0 then "DISABLED"
+  when 1 then "ENABLED"
+  end
+  return n
+end
+
 # Just proxying get_services for views
 def host_get_services(query)
   return get_services(query)

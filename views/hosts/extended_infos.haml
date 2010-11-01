@@ -76,5 +76,39 @@
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Last Update:
 			%td= Time.at(@host[:last_time_up])
-			
+	
+	%table{:border => 0, :class => "table_host_extinfos_check_things", :width => "100%"}
+		%tr
+			%td
+				Active Checks:
+			%td
+				- active_check = number_to_enabledisable(@host[:active_checks_enabled])
+				%span{:class => active_check.downcase}= active_check
+			%td
+				Passive Checks:
+			%td
+				- passive_checks = number_to_enabledisable(@host[:accept_passive_checks])
+				%span{:class => passive_checks.downcase}= passive_checks
+			%td
+				Obsessing:
+			%td
+				- obsessing = number_to_enabledisable(@host[:obsess_over_host])
+				%span{:class => obsessing.downcase}= obsessing
+		%tr
+			%td
+				Notifications:
+			%td
+				- notifications = number_to_enabledisable(@host[:notifications_enabled])
+				%span{:class => notifications.downcase}= notifications
+			%td
+				Event Handler:
+			%td
+				- event_handler = number_to_enabledisable(@host[:event_handler_enabled])
+				%span{:class => event_handler.downcase}= event_handler
+			%td
+				Flap Detection:
+			%td
+				- flap_detection = number_to_enabledisable(@host[:flap_detection_enabled])
+				%span{:class => flap_detection.downcase}= flap_detection
+	
 .clear
