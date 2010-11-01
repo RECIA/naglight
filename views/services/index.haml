@@ -9,18 +9,26 @@
 		%th.service_status_info{:align => "left", :valign => "middle"} Status Information
 	- @curhost = nil
 	- @allservices.each do |service|
+		- service_state = nagios_short_state_names(service[:state]).downcase
 		- if (service[:host_name] != @curhost) and (!@curhost.nil?)
 			%tr
 				%td
 					&nbsp;
-		%tr
+		- if service_state != "ok"
+			- tr_class = "srvc_#{service_state}"
+			- _foo = cycle("services_row0", "services_row1")
+		- else
+			- tr_class = cycle("services_row0", "services_row1")
+		%tr{:class => tr_class}
 			- if service[:host_name] == @curhost
 				%td.nbsp{:align => "left", :valign => "middle"} &nbsp;
 			- else
 				%td.service_host{:align => "left", :valign => "middle"}= service[:host_name]
 			- @curhost = service[:host_name]
 			%td.service_name{:align => "left", :valign => "middle"}= service[:display_name]
-			%td.service_state{:align => "left", :valign => "middle"}= nagios_state_names(service[:state])
+			- service_state = "service_#{nagios_short_state_names(service[:state]).downcase}"
+			%td{:align => "left", :valign => "middle", :class => "service_state #{service_state}"}
+				= nagios_state_names(service[:state])
 			%td.service_last_check{:align => "left", :valign => "middle"}= Time.at(service[:last_check])
 			%td.service_duration{:align => "left", :valign => "middle"}
 				- last_state_change = service[:last_state_change]  # timestamp
