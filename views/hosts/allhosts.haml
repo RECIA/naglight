@@ -23,11 +23,15 @@
 		- if col == 0
 			<tr>
 		%td{:class => "host_state_#{nagios_short_host_state_names(host[:state]).downcase}", :align => "center", :valign => "middle"}= nagios_short_host_state_names(host[:state])
-		%td.host_name{:align => "center", :valign => "middle", :id => "show-more-host-#{host_name}"}
-			%a{:href => "/host/#{host_name}"}= host[:name]
+		%td.host_name{:align => "left", :valign => "middle", :id => "show-more-host-#{host_name}"}
+			%span.host_name_left
+				%a{:href => "/host/#{host_name}"}= host[:name]
+			%span.host_name_right
+				%a{:href => "/services/host/#{host_name}"}
+					%img{:src => "/img/detail.png"}
 		
 		%td.host_icon{:align => "center", :valign => "middle"}
-			%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
+			%img{:src => "/img/#{host[:icon_image]}", :alt => host[:icon_image_alt], :width => "20", :height => "20", :border => "0"}
 			
 		- (host[:num_services_ok] > 0) ? c_ok = "srvc_ok" : c_ok = ""
 		%td{:align => "center", :valign => "middle", :class => c_ok}

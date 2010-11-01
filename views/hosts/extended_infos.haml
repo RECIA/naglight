@@ -13,7 +13,7 @@
 			= @host[:groups].reverse.join(", ")
 		%br
 		%br
-		%img{:src => "http://monitorix.fr.srv.rhaamo.li/nagios3/images/logos/#{@host[:icon_image]}", :alt => @host[:icon_image_alt], :border => "0"}
+		%img{:src => "/img/#{@host[:icon_image]}", :alt => @host[:icon_image_alt], :border => "0"}
 		%br
 		%span#hostinfo_notes
 			= @host[:notes]

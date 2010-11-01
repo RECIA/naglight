@@ -138,6 +138,13 @@ div#grid_footer {
 	
 }
 
+.table_list_hosts td { vertical-align:middle;height:30px; }
+
+.table_list_hosts .nbsp { border:1px solid #d1d1d1; } /* hide line */
+
+.table_list_hosts td.host_icon {
+}
+
 .table_list_services td.service_host {
 	padding-right: 5px;
 }
@@ -253,4 +260,16 @@ span.enabled {
 	color: black;
 	padding-left: 5px;
 	padding-right: 5px;
+}
+
+table.table_list_hosts td.host_name {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+span.host_name_left {
+	text-align: left;
+}
+span.host_name_right {
+	float: right;
 }
