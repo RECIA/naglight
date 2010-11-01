@@ -9,3 +9,7 @@ Authors:
 
 License:
   - MIT License
+
+TODO:
+  - Handle raises of ruby-mk-livestatus to display error page
+  - Verification of :host_name (alphanum+_- only)
