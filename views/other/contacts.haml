@@ -8,7 +8,7 @@
 		%th.contact_notif_period_enabled{:align => "center", :valign => "middle"} Notification period enabled
 		%th.contact_can_submit_commands{:align => "center", :valign => "middle"} Can submit commands
 	- @contacts.each do |contact|
-		%tr{:class => cycle('row1', 'row2')}
+		%tr{:class => cycle('allcontacts_row1', 'allcontacts_row2')}
 			%td.contact_name{:align => "center", :valign => "middle"}
 				= contact[:name]
 			%td.contact_alias{:align => "center", :valign => "middle"}
