@@ -14,6 +14,7 @@ require 'lib/mk-calls'  # put some MK Livestatus calls in external file
 include ActionView::Helpers::TextHelper
 include ActionView::Helpers::UrlHelper  # Need mail_to for auto_link
 
+
 # Need to improve this...
 before do
   # number  /  short  /  end of "num_services_foo" key
@@ -47,6 +48,14 @@ get '/services' do
   group = "StatsGroupBy: host_name\n" # TODO: get it from params[:group_by]
   @allservices = get_mk({:table => "services", :extras_headers => group})
   haml :"services/index"
+end
+
+get '/services/hosts/:host_name' do
+  @title = "Services of #{params[:host_name]}"
+  filter = "Filter: host_name = #{params[:host_name]}\n"
+  @services = get_mk({:table => "services", :extras_headers => filter})
+  @allservices = @services
+  haml :"services/one_host"
 end
 
 get '/contacts' do

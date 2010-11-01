@@ -55,3 +55,8 @@ end
 def host_get_services(query)
   return get_services(query)
 end
+
+# Implement rails-like partials
+def partial(template, options={})
+  haml template, options.merge(:layout => false)
+end
