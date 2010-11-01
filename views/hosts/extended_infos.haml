@@ -22,45 +22,59 @@
 	%table{:border => 0, :class => "table_host_extinfos", :width => "100%"}
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Host Status:
-			%td= nagios_short_host_state_names(@host[:state])
+			%td
+				- host_status = nagios_short_host_state_names(@host[:state])
+				%span{:class => "host_status_#{host_status.downcase}"}= host_status
 			- # Use last_time_down or last_time_unreachable for (for 0d 3mins)... ?
+			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Status Information:
 			%td= @host[:plugin_output]
+			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Performance Data:
 			%td= @host[:perf_data]
+			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Current Attempt:
 			%td
 				= @host[:current_attempt]
 				\/
 				= @host[:max_check_attempts]
+				
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Last Check Time:
 			%td= Time.at(@host[:last_check])
+			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Check Type:
 			%td= nagios_check_type(@host[:check_type])
+			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Check Latency / Duration:
 			%td
 				= @host[:latency]
 				\/
 				= (@host[:execution_time] * 1000).round.to_f / 1000
+				
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Next Scheduled Active Check:
 			%td= Time.at(@host[:next_check])
+			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Last State Change:
 			%td= Time.at(@host[:last_state_change])
 		- # Add Last Notification ?
+		
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Is This Host Flapping?
 			%td
-				= number_to_human(@host[:is_flapping])
+				- host_flapping = number_to_human(@host[:is_flapping])
+				%span{:class => "flapping_#{host_flapping.downcase}"}= host_flapping
 		- # Add Is in scheduled downtime ?
+		
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Last Update:
 			%td= Time.at(@host[:last_time_up])
+			
 .clear

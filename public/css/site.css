@@ -207,3 +207,50 @@ div#grid_footer {
 .allcontacts_row1 {
 	
 }
+
+span.host_status_up{
+	background-color: #00FF16;
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+span.host_status_unreach{
+	background-color: #FFFE00;
+	color: black;
+	font-style: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+span.host_status_down{
+	background-color: #AD0203;
+	color: white;
+	font-style: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+span.flapping_yes {
+	background-color: #AD0203;
+	color: white;
+	font-style: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+span.flapping_no {
+	background-color: #00FF16;
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+span.disabled {
+	background-color: #AD0203;
+	color: white;
+	font-style: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+span.enabled {
+	background-color: #00FF16;
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
