@@ -93,3 +93,10 @@ get '/api/get/services' do
   response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
   return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "services"}))).to_json
 end
+
+get '/api/get/services/host/:host_name' do
+  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
+  filter = "Filter: host_name = #{params[:host_name]}\n"
+
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "services", :extras_headers => filter}))).to_json
+end
