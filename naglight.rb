@@ -1,7 +1,7 @@
-require 'rubygems'
-require 'sinatra'
 require 'json'
-
+require 'haml'
+require 'sinatra'
+require 'action_view'
 require 'lib/helpers' # load our view helpers
 require 'lib/utils'
 require 'lib/ruby-mk-livestatus'
@@ -11,8 +11,6 @@ $mk_livestatus_socket_paths += ["/home/nagios/live"]
 # true / false
 $mk_livestatus_debug=true
 require 'lib/mk-calls'  # put some MK Livestatus calls in external file
-
-require 'action_view'  # for TextHelper
 include ActionView::Helpers::TextHelper
 
 # Need to improve this...
