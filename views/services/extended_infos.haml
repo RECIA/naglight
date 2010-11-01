@@ -1,124 +1,130 @@
 .grid_4.alpha
 	%center
 		%span#hostinfo_name
-			= @host[:alias]
+			= @service[:display_name]
+		%br
 		%span#hostinfo_address
 			(
-			= @host[:address]
+			= @service[:description]
 			)
 		%br
 		%span#hostinfo_members_groups
 			Member of:
 			%br
-			- if @host[:groups].empty?
-				No groups.
+			- if @service[:groups].empty?
+				No groups
 			- else
-				= @host[:groups].reverse.join(", ")
+				= @service[:groups].reverse.join(", ")
 		%br
 		%br
-		- if !@host[:icon_image].empty?
-			%img{:src => "/img/#{@host[:icon_image]}", :alt => @host[:icon_image_alt], :border => "0"}
+		- if !@service[:icon_image].empty?
+			%img{:src => "/img/#{@service[:icon_image]}", :alt => @service[:icon_image_alt], :border => "0"}
 			%br
 		%span#hostinfo_notes
-			= @host[:notes]
+			= @service[:notes]
 		%br
 		%br
 		%br
-		%a.extinfos_link_view_details{:href => "/services/hosts/#{@host[:name]}"}
-			%img.icon_link_view_details{:src => "/img/detail.png"}
+
+		%a.extinfos_link_view_host_infos{:href => "/hosts/more/#{@service[:host_name]}"}
+			%img.icon_link_view_host_infos{:src => "/img/information.png"}
+				&nbsp;View Informations for this Host
+		%br
+		%a.extinfos_link_view_status_details{:href => "/services/hosts/#{@service[:host_name]}"}
+			%img.icon_link_view_status_details{:src => "/img/detail.png"}
 				&nbsp;View Status Detail for this Host
 
 .grid_8.omega.extinfos_right
 	%table{:border => 0, :class => "table_host_extinfos", :width => "100%"}
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
-			%td Host Status:
+			%td Current Status:
 			%td
-				- host_status = nagios_short_host_state_names(@host[:state])
-				%span{:class => "host_status_#{host_status.downcase}"}= host_status
+				- current_status = nagios_short_state_names(@service[:state])
+				%span{:class => "current_status_#{current_status.downcase}"}= current_status
 			- # Use last_time_down or last_time_unreachable for (for 0d 3mins)... ?
 			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Status Information:
-			%td= @host[:plugin_output]
+			%td= @service[:plugin_output]
 			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Performance Data:
-			%td= @host[:perf_data]
+			%td= @service[:perf_data]
 			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Current Attempt:
 			%td
-				= @host[:current_attempt]
+				= @service[:current_attempt]
 				\/
-				= @host[:max_check_attempts]
+				= @service[:max_check_attempts]
 				
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Last Check Time:
-			%td= Time.at(@host[:last_check])
+			%td= Time.at(@service[:last_check])
 			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Check Type:
-			%td= nagios_check_type(@host[:check_type])
+			%td= nagios_check_type(@service[:check_type])
 			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Check Latency / Duration:
 			%td
-				= @host[:latency]
+				= @service[:latency]
 				\/
-				= (@host[:execution_time] * 1000).round.to_f / 1000
+				= (@service[:execution_time] * 1000).round.to_f / 1000
 				
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
-			%td Next Scheduled Active Check:
-			%td= Time.at(@host[:next_check])
+			%td Next Scheduled Check:
+			%td= Time.at(@service[:next_check])
 			
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Last State Change:
-			%td= Time.at(@host[:last_state_change])
+			%td= Time.at(@service[:last_state_change])
 		- # Add Last Notification ?
 		
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
-			%td Is This Host Flapping?
+			%td Is This Service Flapping?
 			%td
-				- host_flapping = number_to_human(@host[:is_flapping])
-				%span{:class => "flapping_#{host_flapping.downcase}"}= host_flapping
+				- service_flapping = number_to_human(@service[:is_flapping])
+				%span{:class => "flapping_#{service_flapping.downcase}"}= service_flapping
 		- # Add Is in scheduled downtime ?
 		
 		%tr{:class => cycle("extinfo_row0", "extinfo_row1")}
 			%td Last Update:
-			%td= Time.at(@host[:last_time_up])
+			%td= Time.at(@service[:last_time_ok])
 	
 	%table{:border => 0, :class => "table_host_extinfos_check_things", :width => "100%"}
 		%tr
 			%td
 				Active Checks:
 			%td
-				- active_check = number_to_enabledisable(@host[:active_checks_enabled])
+				- active_check = number_to_enabledisable(@service[:active_checks_enabled])
 				%span{:class => active_check.downcase}= active_check
 			%td
 				Passive Checks:
 			%td
-				- passive_checks = number_to_enabledisable(@host[:accept_passive_checks])
+				- passive_checks = number_to_enabledisable(@service[:accept_passive_checks])
 				%span{:class => passive_checks.downcase}= passive_checks
 			%td
 				Obsessing:
 			%td
-				- obsessing = number_to_enabledisable(@host[:obsess_over_host])
+				- obsessing = number_to_enabledisable(@service[:obsess_over_service])
 				%span{:class => obsessing.downcase}= obsessing
 		%tr
 			%td
 				Notifications:
 			%td
-				- notifications = number_to_enabledisable(@host[:notifications_enabled])
+				- notifications = number_to_enabledisable(@service[:notifications_enabled])
 				%span{:class => notifications.downcase}= notifications
 			%td
 				Event Handler:
 			%td
-				- event_handler = number_to_enabledisable(@host[:event_handler_enabled])
+				- event_handler = number_to_enabledisable(@service[:event_handler_enabled])
 				%span{:class => event_handler.downcase}= event_handler
 			%td
 				Flap Detection:
 			%td
-				- flap_detection = number_to_enabledisable(@host[:flap_detection_enabled])
+				- flap_detection = number_to_enabledisable(@service[:flap_detection_enabled])
 				%span{:class => flap_detection.downcase}= flap_detection
 	
 .clear

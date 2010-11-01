@@ -282,19 +282,32 @@ div#grid_footer {
 	
 }
 
-/* END EXTINFOS */
-
-/* CONTACTS */
-
-.allcontacts_row0 {
-	background-color: #DEDEDE;
+.extinfos_link_view_details {
+	text-decoration: none;
 }
 
-.allcontacts_row1 {
-	
+.icon_link_view_details {
+	margin-bottom: -2px;
 }
 
-/* END CONTACTS */
+.extinfos_link_view_host_infos {
+	text-decoration: none
+}
+.icon_link_view_host_infos {
+	margin-bottom: -2px;
+}
+.extinfos_link_view_status_details {
+	text-decoration: none
+}
+.icon_link_view_status_details {
+	margin-bottom: -2px;
+}
+
+
+.table_list_services td.service_ok {
+	background-color: #00AE2A;
+	color: white;
+}
 
 span.host_status_up{
 	background-color: #00FF16;
@@ -348,17 +361,62 @@ table.table_list_hosts td.host_name {
 	padding-right: 5px;
 }
 
+span.current_status_ok {
+	background-color: #00FF16;
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+span.current_status_warn {
+	background-color: #FFFE00;
+	color: black;
+	font-style: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+span.current_status_unkn {
+	background-color: #FF7600;
+	color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+span.current_status_crit {
+	background-color: #AD0203;
+	color: white;
+	font-style: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+span.current_status_pend {
+	background-color: #757575;
+	color: white;
+}
+
+
+
+/* END EXTINFOS */
+
+/* CONTACTS */
+
+.allcontacts_row0 {
+	background-color: #DEDEDE;
+}
+
+.allcontacts_row1 {
+	
+}
+
+/* END CONTACTS */
+
+
+
 span.host_name_left {
 	text-align: left;
 }
 span.host_name_right {
 	float: right;
-}
-
-.extinfos_link_view_details {
-	text-decoration: none;
-}
-
-.icon_link_view_details {
-	margin-bottom: -2px;
 }

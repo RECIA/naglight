@@ -58,6 +58,15 @@ get '/services/hosts/:host_name' do
   haml :"services/one_host"
 end
 
+get '/services/more/:host_name/:service_name' do
+  service_name = params[:service_name].gsub("+", " ")
+  @title = "Service #{params[:host_name]}"
+  filter =  "Filter: host_name = #{params[:host_name]}\n"
+  filter << "Filter: display_name = #{service_name}\n"
+  @service = get_mk({:table => "services", :extras_headers => filter}).first
+  haml :"services/extended_infos"
+end
+
 get '/contacts' do
   @title = "Contacts"
   @contacts = get_mk({:table => "contacts"})
