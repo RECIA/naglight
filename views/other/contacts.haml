@@ -14,7 +14,7 @@
 			%td.contact_alias{:align => "center", :valign => "middle"}
 				= contact[:alias]
 			%td.contact_email{:align => "center", :valign => "middle"}
-				= contact[:email]
+				= auto_link(contact[:email])
 			%td.contact_pager{:align => "center", :valign => "middle"}
 				= contact[:pager]
 			%td.contact_notif_period{:align => "center", :valign => "middle"}

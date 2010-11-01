@@ -12,6 +12,7 @@ $mk_livestatus_socket_paths += ["/home/nagios/live"]
 $mk_livestatus_debug=true
 require 'lib/mk-calls'  # put some MK Livestatus calls in external file
 include ActionView::Helpers::TextHelper
+include ActionView::Helpers::UrlHelper  # Need mail_to for auto_link
 
 # Need to improve this...
 before do
