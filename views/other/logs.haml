@@ -1,0 +1,13 @@
+%b
+	Logs from
+	= @from_date
+	to present..
+%br
+%br
+%br
+- @logs.each do |a_log|
+	%div{:class => cycle("logs_row0", "logs_row1")}
+		= "[#{Time.at(a_log[:time])}]"
+		= a_log[:type]
+		= a_log[:options]
+		

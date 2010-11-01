@@ -410,6 +410,19 @@ span.current_status_pend {
 	
 }
 
+.logs_row0 {
+	background-color: #E3E3E3;
+	font-size: 11pt;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.logs_row1 {
+	font-size: 11pt;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
 /* END CONTACTS */
 
 

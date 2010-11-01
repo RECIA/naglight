@@ -1,6 +1,7 @@
 require 'json'
 require 'haml'
 require 'sinatra'
+require 'chronic'
 require 'action_view'
 require 'lib/helpers' # load our view helpers
 require 'lib/utils'
@@ -9,7 +10,7 @@ require 'lib/ruby-mk-livestatus'
 # Respect the Array !
 $mk_livestatus_socket_paths += ["/home/nagios/live"]
 # true / false
-$mk_livestatus_debug=true
+$mk_livestatus_debug=false
 require 'lib/mk-calls'  # put some MK Livestatus calls in external file
 include ActionView::Helpers::TextHelper
 include ActionView::Helpers::UrlHelper  # Need mail_to for auto_link
@@ -67,6 +68,16 @@ get '/services/more/:host_name/:service_name' do
   haml :"services/extended_infos"
 end
 
+get '/logs' do
+  @title = "Logs"
+  @from_date = Chronic.parse("today", :guess => false, :context => :past).first
+  extras_headers =  "Filter: time >= #{@from_date.to_i}\n"
+  @logs = get_mk({:table => "log",
+    :extras_headers => extras_headers,
+    :columns => ['host_name', 'message', 'options', 'plugin_output', 'service_description', 'state', 'state_type', 'time', 'type']})
+  haml :"other/logs"
+end
+
 get '/contacts' do
   @title = "Contacts"
   @contacts = get_mk({:table => "contacts"})
@@ -115,4 +126,13 @@ get '/api/get/services/more/:host_name/:service_name' do
   filter =  "Filter: host_name = #{params[:host_name]}\n"
   filter << "Filter: display_name = #{service_name}\n"
   return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "services", :extras_headers => filter}))).first.to_json
+end
+
+get '/api/get/logs' do
+  response.header['Content-type'] = 'application/x-javascript; charset=UTF-8'
+  @from_date = Chronic.parse("today", :guess => false, :context => :past).first
+  extras_headers =  "Filter: time >= #{@from_date.to_i}\n"
+  return mk_array_to_hash(JSON.parse(get_mk_livestatus({:table => "log",
+    :extras_headers => extras_headers,
+    :columns => ['host_name', 'message', 'options', 'plugin_output', 'service_description', 'state', 'state_type', 'time', 'type']}))).to_json
 end
