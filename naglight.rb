@@ -12,6 +12,9 @@ $mk_livestatus_socket_paths += ["/home/nagios/live"]
 $mk_livestatus_debug=true
 require 'lib/mk-calls'  # put some MK Livestatus calls in external file
 
+require 'action_view'  # for TextHelper
+include ActionView::Helpers::TextHelper
+
 # Need to improve this...
 before do
   # number  /  short  /  end of "num_services_foo" key
