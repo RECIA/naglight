@@ -29,24 +29,24 @@ get '/' do
   haml :index
 end
 
-get '/allhosts' do
+get '/hosts' do
   @title = "All Hosts"
   @allhosts = get_mk({:table => "hosts"})
-  haml :"hosts/allhosts"
+  haml :"hosts/index"
 end
 
-get '/host/:host_name' do
+get '/hosts/:host_name' do
   @title = "Host #{params[:host_name]}"
   extras_headers = "Filter: host_name = #{params[:host_name]}\n"
   @host = get_mk({:table => "hosts", :extras_headers => extras_headers}).first
   haml :"hosts/extended_infos"
 end
 
-get '/allservices' do
+get '/services' do
   @title = "All Services"
   group = "StatsGroupBy: host_name\n" # TODO: get it from params[:group_by]
   @allservices = get_mk({:table => "services", :extras_headers => group})
-  haml :"services/allservices"
+  haml :"services/index"
 end
 
 get '/contacts' do

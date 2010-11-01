@@ -25,9 +25,9 @@
 		%td{:class => "host_state_#{nagios_short_host_state_names(host[:state]).downcase}", :align => "center", :valign => "middle"}= nagios_short_host_state_names(host[:state])
 		%td.host_name{:align => "left", :valign => "middle", :id => "show-more-host-#{host_name}"}
 			%span.host_name_left
-				%a{:href => "/host/#{host_name}"}= host[:name]
+				%a{:href => "/hosts/#{host_name}"}= host[:name]
 			%span.host_name_right
-				%a{:href => "/services/host/#{host_name}"}
+				%a{:href => "/services/hosts/#{host_name}"}
 					%img{:src => "/img/detail.png"}
 		
 		%td.host_icon{:align => "center", :valign => "middle"}

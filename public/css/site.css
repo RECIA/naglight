@@ -145,6 +145,8 @@ div#grid_footer {
 .table_list_hosts td.host_icon {
 }
 
+.table_list_hosts td img { padding-top:3px } ?
+
 .table_list_services td.service_host {
 	padding-right: 5px;
 }
