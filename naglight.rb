@@ -60,7 +60,7 @@ end
 
 get '/services/more/:host_name/:service_name' do
   service_name = params[:service_name].gsub("+", " ")
-  @title = "Service #{params[:host_name]}"
+  @title = "Service #{service_name}"
   filter =  "Filter: host_name = #{params[:host_name]}\n"
   filter << "Filter: display_name = #{service_name}\n"
   @service = get_mk({:table => "services", :extras_headers => filter}).first
